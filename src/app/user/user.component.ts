@@ -1,7 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
-
-const getRandomUser = () => Math.floor(Math.random() * DUMMY_USERS.length);
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -11,15 +8,12 @@ const getRandomUser = () => Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  selectedUser = signal(DUMMY_USERS[getRandomUser()]);
-  imagePath = computed(() => `../../assets/users/${this.selectedUser().avatar}`);
+  @Input() name!: string;
+  @Input() avatar!: string;
 
-  //* Since we now use "Signals" we don't need this getter anymore
-  // get imagePath() {
-  //   return `../../assets/users/${this.selectedUser.avatar}`;
-  // }
-
-  onSelectUser() {
-    this.selectedUser.set(DUMMY_USERS[getRandomUser()]);
+  get imagePath() {
+    return `assets/users/${this.avatar}`;
   }
+
+  onSelectUser() {}
 }
