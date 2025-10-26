@@ -18,6 +18,6 @@ export class UserComponent {
   }
 
   onSelectUser() {
-    this.userSelect.emit(this.name);
+    this.userSelect.emit(this.id);
   }
 }
