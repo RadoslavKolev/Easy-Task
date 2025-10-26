@@ -18,7 +18,7 @@ export class AppComponent {
   // Added getter to retrieve the selected user based on selectedUserId
   // The exclamation mark asserts that the result will not be undefined
   get selectedUser() {
-    return this.users.find(user => user.id === this.selectedUserId)!;
+    return this.users.find(user => user.id === this.selectedUserId);
   }
 
   onSelectUser(id: string) {
