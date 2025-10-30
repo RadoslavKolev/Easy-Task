@@ -39,7 +39,8 @@ button {
 
 button[type="button"]:hover,
 button[type="button"]:active {
-  color: #d0c2e1;
+  background-color: #9965dd;
+  color: #150722;
 }
 
 #users {
