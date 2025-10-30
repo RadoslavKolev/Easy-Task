@@ -1,5 +1,8 @@
 <app-card>
   <button [class.active]="isSelected" (click)="onSelectUser()">
-    <span>{{ user.name }}</span>
+    <div>
+      <span>{{ user.name }}</span>
+      <span class="delete" (click)="onDeleteUser($event)">✖</span>
+    </div>
   </button>
 </app-card>

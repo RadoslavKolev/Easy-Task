@@ -28,7 +28,7 @@ export class AppComponent {
   }
 
   // Save the tasks array as a string in localStorage
-  private saveTasks() {
+  private saveUsers() {
     localStorage.setItem('users', JSON.stringify(this.users));
   }
 
@@ -53,6 +53,16 @@ export class AppComponent {
 
     this.users.push(newUser);
     this.newUserName = '';
-    this.saveTasks();
+    this.saveUsers();
+  }
+
+  onDeleteUser(id: string) {
+    this.users = this.users.filter(user => user.id !== id);
+
+    if (this.selectedUserId === id) {
+      this.selectedUserId = undefined; // clear selection if deleted
+    }
+
+    this.saveUsers();
   }
 }

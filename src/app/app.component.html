@@ -39,6 +39,7 @@
           [user]="user"
           [isSelected]="user.id === selectedUserId"
           (userSelect)="onSelectUser($event)"
+          (userDelete)="onDeleteUser($event)"
         />
       </li>
     }
