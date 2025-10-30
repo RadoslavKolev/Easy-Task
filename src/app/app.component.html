@@ -1,6 +1,37 @@
 <app-header />
 
 <main>
+  <!-- Add User Section -->
+  <section id="add-user">
+    <div>
+      <h1>Add a user</h1>
+      <p>
+        <label for="user">User</label>
+        <input
+          type="text"
+          id="user"
+          name="user"
+          placeholder="Enter name"
+          [(ngModel)]="newUserName"
+        />
+      </p>
+      <button type="button" (click)="addUser()">Add</button>
+    </div>
+  </section>
+
+
+  @if(selectedUser) {
+    <app-tasks [userId]="selectedUser.id" [name]="selectedUser.name" />
+  } @else {
+      <h1 id="fallback">
+        @if(users.length === 0) {
+          Add a user to begin
+        } @else {
+          Select a user to see their tasks
+        }
+      </h1>
+  }
+
   <ul id="users">
     @for (user of users; track user.id) {
       <li>
@@ -12,10 +43,4 @@
       </li>
     }
   </ul>
-
-  @if(selectedUser) {
-    <app-tasks [userId]="selectedUser.id" [name]="selectedUser.name" />
-  } @else {
-    <p id="fallback">Select a user to see their tasks</p>
-  }
 </main>
