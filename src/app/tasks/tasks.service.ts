@@ -1,41 +1,19 @@
 import { Injectable } from "@angular/core";
 import { NewTaskData } from "./task/task.model";
+import { DUMMY_TASKS } from "./dummy-tasks";
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
-  private tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master Angular',
-      summary:
-        'Learn all the basic and advanced features of Angular and how to apply them',
-      dueDate: '2025-12-31',
-    },
-    {
-      id: 't2',
-      userId: 'u3',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online shop website',
-      dueDate: '2026-05-31',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Prepare issue template',
-      summary:
-        'Prepare and describe an issue template which will help with project management',
-      dueDate: '2026-06-15',
-    },
-  ];
+  private tasks = DUMMY_TASKS;
 
+  // Load tasks from localStorage if available
   constructor() {
-    const tasks = localStorage.getItem('tasks');
+    const storedTasks = localStorage.getItem('tasks');
 
     // Returned data from localStorage is always a string
     // We need to parse it back to an array of tasks
-    if (tasks) {
-      this.tasks = JSON.parse(tasks);
+    if (storedTasks) {
+      this.tasks = JSON.parse(storedTasks);
     }
   }
 
@@ -44,10 +22,12 @@ export class TasksService {
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 
+  // Get all tasks for a specific user
   getUserTasks(userId: string) {
     return this.tasks.filter((task) => task.userId === userId);
   }
 
+  // Add a new task for a specific user
   addTask(taskData: NewTaskData, userId: string) {
     this.tasks.unshift({
       id: Date.now().toString(),
@@ -60,6 +40,7 @@ export class TasksService {
     this.saveTasks();
   }
 
+  // Remove a task by its ID
   removeTask(id: string) {
     this.tasks = this.tasks.filter((task) => task.id !== id);
     this.saveTasks();
